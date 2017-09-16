@@ -24,4 +24,6 @@ func myHandlerFunc(w http.ResponseWriter, r *http.Request) {
 	}
 	user := strings.TrimPrefix(r.URL.Path, "/users/")
 	twitch.GetUserInfo(w,r,user)
+	twitch.GetChannelInfo(w,r,user)
+	twitch.IsStreaming(w,r,user)
 }
