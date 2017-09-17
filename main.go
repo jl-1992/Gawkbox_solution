@@ -10,7 +10,7 @@ import (
 func main() {
 	fmt.Println("Booting the server...")
 
-	// Configure a sample route
+	// Sample route
 	http.HandleFunc("/users/", myHandlerFunc)
 
 	// Run your server
@@ -19,11 +19,15 @@ func main() {
 
 // myHandlerFunc - A sample handler function for the route /sample_route for your HTTP server
 func myHandlerFunc(w http.ResponseWriter, r *http.Request) {
+	//If request method is anything but GET, throw error
 	if r.Method != "GET" {
 		http.Error(w, "Invalid request method.", 405)
+	}else{
+		//Trim URL path to get suffix of users/USERNAME so user=USERNAME
+		user := strings.TrimPrefix(r.URL.Path, "/users/")
+		w.Header().Set("content-type", "application/json")
+		twitch.GetUserInfo(w,r,user)
+		twitch.GetChannelInfo(w,r,user)
+		twitch.IsStreaming(w,r,user)
 	}
-	user := strings.TrimPrefix(r.URL.Path, "/users/")
-	twitch.GetUserInfo(w,r,user)
-	twitch.GetChannelInfo(w,r,user)
-	twitch.IsStreaming(w,r,user)
 }

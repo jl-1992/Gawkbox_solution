@@ -11,38 +11,38 @@ func init() {
 	fmt.Println("Initializing Twitch API...")
 }
 
-/*set up GetUser and Get Channel methods, look at Twitch API*/
-//Is client_id same for all IP addresses??
-
 func GetUserInfo(w http.ResponseWriter, r *http.Request, username string){
+	//Created a struct designating the fields we want that will be available from API
 	type Fields struct {
-		//Id   int64  `json:"_id"`
 		Bio string `json:"bio"`
 		CreatedAt string `json:"created_at"`
 		DisplayName string `json:"display_name"`
 	}
+
+	//received client_id when registering app and can use that to access Twitch API
 	res, err := http.Get("https://api.twitch.tv/kraken/users/"+username+"/?client_id=tsxcx1up34ibjx1ttvjjlpkq69t737")
 	if err != nil{
 		panic(err.Error())
 	}
+	//Read all of the body from the response of the get response
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		panic(err.Error())
 	}
 	defer res.Body.Close()
 	var fields Fields
+	//Unmarshal JSON from body and put into fields
 	err = json.Unmarshal(body, &fields)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-
+	//Marshal JSON to /users/ HTTP page
 	output, err := json.MarshalIndent(fields, "", "  ")
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	w.Header().Set("content-type", "application/json")
 	w.Write([]byte("User info:\n"))
 	w.Write(output)
 	w.Write([]byte("\n\n"))
@@ -77,7 +77,6 @@ func GetChannelInfo(w http.ResponseWriter, r *http.Request, username string){
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	w.Header().Set("content-type", "application/json")
 	w.Write([]byte("Channel info:\n"))
 	w.Write(output)
 	w.Write([]byte("\n\n"))
@@ -86,6 +85,10 @@ func GetChannelInfo(w http.ResponseWriter, r *http.Request, username string){
 func IsStreaming(w http.ResponseWriter, r *http.Request, username string){
 	type Fields struct {
 		Fields struct {
+			/*Using video_height as a field because a stream that is live
+			returns an object "stream" which itself is an object. Thus,
+			if the user is not streaming, video_height will be zero, but if 
+			they are streaming, it will not be zero*/
 			Video_Height int64 `json:"video_height"`
 		} `json:"stream"`
 	}
@@ -111,6 +114,7 @@ func IsStreaming(w http.ResponseWriter, r *http.Request, username string){
 		return
 	}
 
+	//Created my own JSON object to make stream key, value more basic
 	var stream_map map[string]bool = make(map[string]bool)
 	if fields.Fields.Video_Height==0{
 		stream_map = map[string]bool{"stream": false}
@@ -119,6 +123,5 @@ func IsStreaming(w http.ResponseWriter, r *http.Request, username string){
 	}
 	output, _ = json.MarshalIndent(stream_map, "", "  ")
 	w.Write([]byte("Stream info:\n"))
-	w.Header().Set("content-type", "application/json")
 	w.Write(output)	
 }
