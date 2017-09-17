@@ -9,7 +9,7 @@ Lastly, run "main" to start the server.
 
 How To Build & Run (as a Docker container from terminal):
 
-Step 1. Run "docker pull jl1992/gawkbox"
+Step 1. Run "docker pull jl1992/gawkbox"<br />
 Step 2. Run "docker run --rm -p 8080:8080 jl1992/gawkbox"
 
 The application will be running on localhost:8080
@@ -46,4 +46,3 @@ An Example: [user=esl_csgo]
     {
     "stream": true <Indicates whether or not a channel is currently streaming>
     }
-
