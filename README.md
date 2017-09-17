@@ -3,10 +3,8 @@
 How To Build & Run:
 
 To build the server, first ensure that the $GOPATH is set to the path where 
-you downloaded this .zip from GitHub. Then, move in your terminal from the 
-top-level directory into the /src/twitch directory and run "go install". Lastly,
-move in your terminal to the top-level directory again and run "go run main.go" 
-to start the server.
+you downloaded this .zip from GitHub. Then, from the top-level directory run "go
+install twitch". Lastly, run "go run main.go" to start the server.
 
 Request/Response Flow:
 
