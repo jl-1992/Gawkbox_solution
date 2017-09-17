@@ -24,7 +24,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request, username string){
 	if err != nil{
 		panic(err.Error())
 	}
-	//Read all of the body from the response of the get response
+	//Read all of the body from the response of the get request
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		panic(err.Error())
