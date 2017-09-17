@@ -54,7 +54,6 @@ func GetChannelInfo(w http.ResponseWriter, r *http.Request, username string){
 		Followers   int64  `json:"followers"`
 		Game string `json:"game"`
 		Language string `json:"language"`
-
 	}
 	res, err := http.Get("https://api.twitch.tv/kraken/channels/"+username+"/?client_id=tsxcx1up34ibjx1ttvjjlpkq69t737")
 	if err != nil{
@@ -85,7 +84,7 @@ func GetChannelInfo(w http.ResponseWriter, r *http.Request, username string){
 func IsStreaming(w http.ResponseWriter, r *http.Request, username string){
 	type Fields struct {
 		Fields struct {
-			/*Using video_height as a field because a stream that is live
+			/*I used video_height as a field because a stream that is live
 			returns an object "stream" which itself is an object. Thus,
 			if the user is not streaming, video_height will be zero, but if 
 			they are streaming, it will not be zero*/

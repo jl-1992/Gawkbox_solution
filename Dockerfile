@@ -1,8 +1,9 @@
 # Your Dockerfile instructions go HERE
-FROM golang:latest
+FROM golang:1.9
 RUN mkdir /app
 WORKDIR /app
 ADD . /app
-RUN go install twitch
-RUN go build ./main.go
-CMD ["./main"]
+ENV GOPATH /app
+ENV PATH="/app/bin:${PATH}"
+RUN go install main
+CMD ["main", "run"]
