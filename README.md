@@ -1,16 +1,16 @@
 ## Remote Assignment V3
 
-How To Build & Run:
+How To Build & Run (from downloaded files):
 
 To build the server, first ensure that the GOPATH is set to where 
 you downloaded this .zip from GitHub. Additionally, your PATH variable needs to 
 contain $GOPATH/bin. Then, from the top-level directory run "go install main". 
 Lastly, run "main" to start the server.
 
-How To Build & Run (as a Docker container):
+How To Build & Run (as a Docker container from terminal):
 
-Run "docker build -t your_filename ." from the directory with Dockerfile in it.
-Then, run "docker run --rm -p 8080:8080 your_filename"
+Step 1. Run "docker pull jl1992/gawkbox"
+Step 2. Run "docker run --rm -p 8080:8080 jl1992/gawkbox"
 
 The application will be running on localhost:8080
 
