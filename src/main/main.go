@@ -10,14 +10,12 @@ import (
 func main() {
 	fmt.Println("Booting the server...")
 
-	// Sample route
 	http.HandleFunc("/users/", myHandlerFunc)
 
-	// Run your server
 	http.ListenAndServe(":8080", nil)
 }
 
-// myHandlerFunc - A sample handler function for the route /sample_route for your HTTP server
+// myHandlerFunc - A handler function for the route /users for the HTTP server
 func myHandlerFunc(w http.ResponseWriter, r *http.Request) {
 	//If request method is anything but GET, throw error
 	if r.Method != "GET" {
