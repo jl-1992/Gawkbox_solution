@@ -7,11 +7,6 @@ Step 2: Ensure PATH has included $GOPATH/bin<br />
 Step 3: Run "go install main" from top-level directory<br />
 Step 4: Run "main"
 
-How To Build & Run (as a Docker container from Docker Hub):
-
-Step 1: Run "docker pull jl1992/gawkbox"<br />
-Step 2: Run "docker run --rm -p 8080:8080 jl1992/gawkbox"
-
 How To Build & Run (using the Dockerfile):
 
 Step 1: Run "docker build -t your_filename ."<br />
