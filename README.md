@@ -16,7 +16,7 @@ The application will be running on localhost:8080
 
 Request/Response Flow:
 
-To obtain the information specified in the remote assignment in JSON format, 
+To obtain user/channel information in JSON format, 
 navigate to the route "localhost:8080/users/USERNAME", where USERNAME is the name 
 of the Twitch user whose data you wish to access. The HTTP response will be in
 JSON format with appropriate headers added for readability.
